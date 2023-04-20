@@ -9,13 +9,16 @@ namespace Tema2_MVP.Models
     public class Task
     {
         public string name { get; set; }
-        public string description { get; set; }
         public string priority { get; set; }
-        public string dueDate { get; set; }
+        public DateTime dueDate { get; set; }
+        public DateTime deadline { get; set; }
         public string type { get; set; }
-        bool isDone { get; set; }
+        public bool isDone { get; set; }
+        public string description { get; set; }
+        public string category { get; set; }
+        public string status { get; set; }
 
-        public Task(string name, string description, string priority, string dueDate, string type, bool isDone)
+        public Task(string name, string description, string category, string status, string priority, string type, bool isDone, DateTime dueDate, DateTime deadline)
         {
             this.name = name;
             this.description = description;
@@ -23,6 +26,9 @@ namespace Tema2_MVP.Models
             this.dueDate = dueDate;
             this.type = type;
             this.isDone = isDone;
+            this.category = category;
+            this.status = status;
+            this.deadline = deadline;
         }
     }
 }

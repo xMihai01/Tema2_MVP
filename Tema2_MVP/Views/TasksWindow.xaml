@@ -3,21 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Tema2_MVP.Views" xmlns:viewmodels="clr-namespace:Tema2_MVP.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:TreeVM}"
+        xmlns:local="clr-namespace:Tema2_MVP.Views" xmlns:viewmodels="clr-namespace:Tema2_MVP.ViewModels"
         mc:Ignorable="d"
         Title="TasksWindow" Height="450" Width="800">
     <Grid>
-        <TreeView Name="TasksTree" Margin="10,72,592,72" ItemsSource="{Binding RootNode.Children}">
+        <TreeView Name="TasksTree" Margin="10,72,592,72" ItemsSource="{Binding tree.RootNode.Children}">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                     <TextBlock Text="{Binding Text}" />
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <EventSetter Event="PreviewMouseDoubleClick" Handler="TreeViewItem_MouseDoubleClick"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
         </TreeView>
         <DockPanel x:Name="gameWindowDockPanel" Margin="0,0,0,392">
             <Menu DockPanel.Dock="Top" Height="49">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_Open Database"/>
+                    <MenuItem Header="_Open Database" Command="{Binding tree.OpenDatabaseItemCommand}"/>
                     <MenuItem Header="_New Database"/>
                     <MenuItem Header="_Archive Database"/>
                     <Separator />
@@ -53,6 +58,15 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
+        <DataGrid Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding table.Items}" Margin="234,72,10,217" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="Priority" Binding="{Binding priority}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding type}"/>
+                <DataGridTextColumn Header="Due Date" Binding="{Binding dueDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox HorizontalAlignment="Left" Margin="234,259,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="556" Height="103" TextChanged="TextBox_TextChanged"/>
 
     </Grid>
 </Window>

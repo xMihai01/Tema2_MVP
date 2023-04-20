@@ -5,7 +5,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Tema2_MVP.Commands;
 using Tema2_MVP.Models;
+using Tema2_MVP.Views;
 using static Tema2_MVP.Utils.FileUtils;
 
 namespace Tema2_MVP.ViewModels
@@ -23,26 +26,29 @@ namespace Tema2_MVP.ViewModels
                 OnPropertyChanged(nameof(RootNode));
             }
         }
+        public object SelectedItem { get; set; }
 
         public TreeVM()
         {
-            Database db = GetDatabaseDetailsFromFile("mihai");
-            Console.WriteLine(db.nodes.ElementAt(0).Children.ElementAt(0).Text);
             Node node = new Node
             {
                 Text = "Database",
-                Children = db.nodes
+                Children = ContainerVM.database.nodes
+
             };
             RootNode = node;
-                /* Children = new ObservableCollection<Node>
-             {
-                 new Node { Text = "Child 1" ,
-                 Children = new ObservableCollection<Node> {
-                 new Node {Text="Child7318"} }},
-                 new Node { Text = "Child 2" }
-             }*/
-       
-            
+
+        }
+
+        private void UpdateTree()
+        {
+            Node node = new Node
+            {
+                Text = "Database",
+                Children = ContainerVM.database.nodes
+
+            };
+            RootNode = node;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -51,5 +57,19 @@ namespace Tema2_MVP.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public ICommand OpenDatabaseItemCommand => new RelayCommand(OpenDatabaseItem);
+
+        public void OpenDatabaseItem()
+        {
+            InputWindow inputDialog = new InputWindow("Please enter database name:", "mihai", GetDatabaseList());
+            if (inputDialog.ShowDialog() == true)
+                ContainerVM.database = GetDatabaseDetailsFromFile(inputDialog.Answer);
+            UpdateTree();
+
+            // Change currentDatabase.txt
+
+        }
+
     }
 }

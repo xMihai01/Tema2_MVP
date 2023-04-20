@@ -59,11 +59,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Models\Database.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Utils\FileUtils.cs" />
+    <Compile Include="Utils\TreeUtils.cs" />
+    <Compile Include="ViewModels\ContainerVM.cs" />
+    <Compile Include="ViewModels\TableVM.cs" />
     <Compile Include="ViewModels\TreeVM.cs" />
+    <Compile Include="Views\InputWindow.xaml.cs">
+      <DependentUpon>InputWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TasksWindow.xaml.cs">
       <DependentUpon>TasksWindow.xaml</DependentUpon>
     </Compile>
@@ -96,6 +103,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Views\InputWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\TasksWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
