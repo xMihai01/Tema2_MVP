@@ -5,8 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Linq;
 using Tema2_MVP.Models;
+using Tema2_MVP.ViewModels;
+using static Tema2_MVP.Utils.TaskUtils;
 
 namespace Tema2_MVP.Utils
 {
@@ -26,7 +29,10 @@ namespace Tema2_MVP.Utils
             if (!File.Exists("databases/databaseList.txt")) {
                 File.Create("databases/databaseList.txt");
             }
-
+            if (!File.Exists("databases/currentDatabase" + fileExtension))
+            {
+                File.Create("databases/currentDatabase" + fileExtension);
+            }
         }
         public static Database GetDatabaseDetailsFromFile(string databaseName)
         {
@@ -35,6 +41,8 @@ namespace Tema2_MVP.Utils
 
             if (File.Exists(databaseDirectory + "/" + databaseName + "/todoList" + fileExtension))
             {
+                ChangeCurrentDB(databaseName);
+                database.name = databaseName;
                 Queue<string> queue = new Queue<string>();
                 Queue<string> dirQueue = new Queue<string>();
                 Queue<Node> nodeQueue = new Queue<Node>();
@@ -73,23 +81,24 @@ namespace Tema2_MVP.Utils
             return database;
         }
 
-        private static ObservableCollection<Models.Task> GetTasksForTDL(string currentDir, string tdl)
+        public static void CreateDatabase(string name)
         {
-            ObservableCollection<Models.Task> tasks = new ObservableCollection<Models.Task>();
-            if (File.Exists(currentDir + tdl + "/tasksList" + fileExtension))
+            string[] dbs = System.IO.File.ReadAllLines("databases/currentDatabase.txt");
+            foreach (string db in dbs)
             {
-                string[] dbdata = System.IO.File.ReadAllLines(currentDir + tdl + "/tasksList" + fileExtension);
-                foreach (string data in dbdata)
+                if (db == name)
                 {
-                    if (File.Exists(currentDir + tdl + "/" + data + fileExtension))
-                    {
-                        string[] taskData = System.IO.File.ReadAllLines(currentDir + tdl + "/" + data + fileExtension);
-                        tasks.Add(new Models.Task(data, taskData[0], taskData[1], taskData[2], taskData[3], taskData[4],
-                            false, Convert.ToDateTime(taskData[5]), Convert.ToDateTime(taskData[6])));
-                    }
+                    MessageBox.Show("There is already a database with the given name!");
+                    return;
                 }
             }
-            return tasks;
+            using (StreamWriter file = new StreamWriter(databaseDirectory + "/databaseList" + fileExtension, true))
+            {
+                file.WriteLine(name);
+            }
+            MessageBox.Show("Success!");
+            Directory.CreateDirectory("databases/" + name);
+            using (FileStream fs3 = File.Create("databases/" + name + "/todoList" + fileExtension)) ;
         }
 
 
@@ -100,6 +109,23 @@ namespace Tema2_MVP.Utils
                 return System.IO.File.ReadAllLines("databases/databaseList.txt");
             }
             return null;
+        }
+
+        private static void ChangeCurrentDB(string name)
+        {
+            
+            using (StreamWriter file = new StreamWriter(databaseDirectory + "/currentDatabase" + fileExtension, false))
+            {
+                file.WriteLine(name);
+            }
+        }
+
+        public static string GetCurrentDB()
+        {
+            string[] data = System.IO.File.ReadAllLines("databases/currentDatabase.txt");
+            if (data.Count() > 0)
+                return data[0];
+            return "";
         }
 
     }

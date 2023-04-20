@@ -41,6 +41,11 @@ namespace Tema2_MVP.Views
         private void btnListClick(object sender, RoutedEventArgs e)
         {
             string listAsMessage = "";
+            if (list == null)
+            {
+                MessageBox.Show("No list available right now.");
+                return;
+            }
             foreach (string item in list)
             {
                 listAsMessage = listAsMessage + item + "\n";

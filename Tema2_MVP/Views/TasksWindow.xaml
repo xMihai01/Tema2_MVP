@@ -23,19 +23,20 @@
             <Menu DockPanel.Dock="Top" Height="49">
                 <MenuItem Header="_File">
                     <MenuItem Header="_Open Database" Command="{Binding tree.OpenDatabaseItemCommand}"/>
-                    <MenuItem Header="_New Database"/>
+                    <MenuItem Header="_New Database" Command="{Binding tree.CreateDatabaseItemCommand}"/>
                     <MenuItem Header="_Archive Database"/>
                     <Separator />
                     <MenuItem Header="_Exit"/>
                 </MenuItem>
                 <MenuItem Header="_TDL">
-                    <MenuItem Header="_Add Root TDL"/>
-                    <MenuItem Header="_Add Sub-TDL"/>
-                    <MenuItem Header="_Edit"/>
-                    <MenuItem Header="_Delete"/>
-                    <MenuItem Header="_Move up"/>
-                    <MenuItem Header="_Move down"/>
-                    <MenuItem Header="_Change path"/>
+                    <MenuItem Header="_Add Root TDL" Command="{Binding tree.AddRootTDLItemCommand}"/>
+                    <MenuItem Header="_Add Sub-TDL" Command="{Binding tree.AddTDLItemCommand}"/>
+                    <MenuItem Header="_Edit" Command="{Binding tree.EditTDLItemCommand}"/>
+                    <MenuItem Header="_Delete" Command="{Binding tree.DeleteTDLItemCommand}"/>
+                    <MenuItem Header="_Move up" Command="{Binding tree.MoveUpTDLItemCommand}"/>
+                    <MenuItem Header="_Move down" Command="{Binding tree.MoveDownTDLItemCommand}"/>
+                    <MenuItem Header="_Change path - Root" Command="{Binding tree.ChangePathRootItemCommand}"/>
+                    <MenuItem Header="_Change Path - SubTDL"/>
                 </MenuItem>
                 <MenuItem Header="_Task">
                     <MenuItem Header="_Add"/>

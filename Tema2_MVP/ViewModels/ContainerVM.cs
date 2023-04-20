@@ -11,7 +11,7 @@ namespace Tema2_MVP.ViewModels
 {
     public class ContainerVM
     {
-        public static Database database = GetDatabaseDetailsFromFile("mihai");
+        public static Database database = GetDatabaseDetailsFromFile(GetCurrentDB());
         public TableVM table { get; set; }
         public TreeVM tree { get; set; }
 

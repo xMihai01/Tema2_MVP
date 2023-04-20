@@ -14,5 +14,7 @@ namespace Tema2_MVP.Models
         public Database() { 
             nodes = new ObservableCollection<Node>();
         }
+
+
     }
 }

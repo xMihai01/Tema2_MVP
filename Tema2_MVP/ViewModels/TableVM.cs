@@ -29,8 +29,6 @@ namespace Tema2_MVP.ViewModels
 
         public TableVM()
         {
-
-            Items = ContainerVM.database.nodes.ElementAt(1).Children.ElementAt(0).tasks;
     
         }
     }
