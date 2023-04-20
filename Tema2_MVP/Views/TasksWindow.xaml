@@ -36,7 +36,7 @@
                     <MenuItem Header="_Move up" Command="{Binding tree.MoveUpTDLItemCommand}"/>
                     <MenuItem Header="_Move down" Command="{Binding tree.MoveDownTDLItemCommand}"/>
                     <MenuItem Header="_Change path - Root" Command="{Binding tree.ChangePathRootItemCommand}"/>
-                    <MenuItem Header="_Change Path - SubTDL"/>
+                    <MenuItem Header="_Change Path - SubTDL" Command="{Binding tree.ChangePathSubItemCommand}"/>
                 </MenuItem>
                 <MenuItem Header="_Task">
                     <MenuItem Header="_Add"/>

@@ -29,6 +29,7 @@ namespace Tema2_MVP.ViewModels
             }
         }
         public Node SelectedItem { get; set; }
+        public Node helperNode { get; set; }
 
         public TreeVM()
         {
@@ -70,6 +71,7 @@ namespace Tema2_MVP.ViewModels
         public ICommand MoveUpTDLItemCommand => new RelayCommand(MoveUpTDLItem);
         public ICommand MoveDownTDLItemCommand => new RelayCommand(MoveDownTDLItem);
         public ICommand ChangePathRootItemCommand => new RelayCommand(ChangePathRootItem);
+        public ICommand ChangePathSubItemCommand => new RelayCommand(ChangePathSubItem);
 
         public void OpenDatabaseItem()
         {
@@ -153,6 +155,23 @@ namespace Tema2_MVP.ViewModels
                 return;
             }
             ChangePathRoot(SelectedItem); UpdateTree();
+        }
+        public void ChangePathSubItem()
+        {
+            if (SelectedItem == null)
+            {
+                MessageBox.Show("Select a TDL first.");
+                return;
+            }
+            if (helperNode == null)
+                helperNode = SelectedItem;
+            if (helperNode == SelectedItem)
+            {
+                MessageBox.Show("First TDL saved. Select another TDL and try again.");
+                return;
+            }
+            ChangePathSub(helperNode, SelectedItem); UpdateTree(); helperNode = null;
+            
         }
 
     }

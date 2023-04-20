@@ -157,13 +157,22 @@ namespace Tema2_MVP.Utils
 
         public static void ChangePathRoot(Node selectedNode)
         {
-            string path = GetPathFromTreeNode(selectedNode.lastNode);
             string dbName = ContainerVM.database.name;
             using (StreamWriter file = new StreamWriter("databases/" + dbName + "/todoList.txt", true))
             {
                 file.WriteLine(selectedNode.Text);
             }
             Directory.Move(GetPathFromTreeNode(selectedNode), "databases/" + dbName +"/" + selectedNode.Text);
+            DeleteTDL(selectedNode, false);
+
+        }
+        public static void ChangePathSub(Node selectedNode, Node toNode)
+        {
+            using (StreamWriter file = new StreamWriter(GetPathFromTreeNode(toNode) + "todoList.txt", true))
+            {
+                file.WriteLine(selectedNode.Text);
+            }
+            Directory.Move(GetPathFromTreeNode(selectedNode), GetPathFromTreeNode(toNode) + selectedNode.Text);
             DeleteTDL(selectedNode, false);
 
         }
