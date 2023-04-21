@@ -1,0 +1,23 @@
+﻿<Window x:Class="Tema2_MVP.Views.InputTaskWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tema2_MVP.Views"
+        mc:Ignorable="d"
+        Title="InputTaskWindow" Height="350" Width="500">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Margin="67,37,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="120" Height="36"/>
+        <ComboBox ItemsSource="{Binding priorityList}" SelectedItem="{Binding Priority}" HorizontalAlignment="Left" Margin="231,104,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox ItemsSource="{Binding categoryList}" SelectedItem="{Binding Category}" HorizontalAlignment="Left" Margin="67,104,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="67,162,0,0" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="284" Height="54"/>
+        <DatePicker SelectedDate="{Binding Date}" HorizontalAlignment="Left" Margin="231,37,0,0" VerticalAlignment="Top" Height="36" Width="120"/>
+        <Label Content="Task Name" HorizontalAlignment="Left" Margin="89,6,0,0" VerticalAlignment="Top" Width="86"/>
+        <Label Content="Deadline" HorizontalAlignment="Left" Margin="267,6,0,0" VerticalAlignment="Top"/>
+        <Label Content="Priority" HorizontalAlignment="Left" Margin="267,78,0,0" VerticalAlignment="Top"/>
+        <Label Content="Category" HorizontalAlignment="Left" Margin="98,78,0,0" VerticalAlignment="Top"/>
+        <Label Content="Description" HorizontalAlignment="Left" Margin="180,131,0,0" VerticalAlignment="Top"/>
+        <Button Click="SaveTask" Content="Save Task" HorizontalAlignment="Left" Margin="139,256,0,0" VerticalAlignment="Top" Height="22" Width="140"/>
+
+    </Grid>
+</Window>

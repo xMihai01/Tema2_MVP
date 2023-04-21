@@ -40,9 +40,5 @@ namespace Tema2_MVP.Views
             }
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }

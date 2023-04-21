@@ -69,7 +69,11 @@
     <Compile Include="Utils\TreeUtils.cs" />
     <Compile Include="ViewModels\ContainerVM.cs" />
     <Compile Include="ViewModels\TableVM.cs" />
+    <Compile Include="ViewModels\TaskVM.cs" />
     <Compile Include="ViewModels\TreeVM.cs" />
+    <Compile Include="Views\InputTaskWindow.xaml.cs">
+      <DependentUpon>InputTaskWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InputWindow.xaml.cs">
       <DependentUpon>InputWindow.xaml</DependentUpon>
     </Compile>
@@ -105,6 +109,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Views\InputTaskWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\InputWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Tema2_MVP.Commands;
 using Tema2_MVP.Models;
 using static Tema2_MVP.Utils.FileUtils;
 
@@ -27,9 +28,35 @@ namespace Tema2_MVP.ViewModels
             }
         }
 
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                if (_description != value)
+                {
+                    _description = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Description)));
+                }
+            }
+        }
+
         public TableVM()
         {
     
         }
+        public void UpdateTable(Node atNode)
+        {
+            Items = atNode.tasks;
+        }
+
+        public ICommand DescriptionBoxUpdateCommand => new RelayCommand(DescriptionBoxUpdate);
+
+        public void DescriptionBoxUpdate()
+        {
+            Console.WriteLine("d");   
+        }
+
     }
 }
