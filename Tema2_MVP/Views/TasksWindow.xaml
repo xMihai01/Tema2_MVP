@@ -40,7 +40,7 @@
                 </MenuItem>
                 <MenuItem Header="_Task">
                     <MenuItem Header="_Add" Command="{Binding AddTaskItemCommand}"/>
-                    <MenuItem Header="_Edit"/>
+                    <MenuItem Header="_Edit" Command="{Binding EditTaskItemCommand}"/>
                     <MenuItem Header="_Delete"/>
                     <MenuItem Header="_Set done"/>
                     <MenuItem Header="_Move up"/>
@@ -59,12 +59,15 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <DataGrid Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding table.Items}" Margin="234,72,10,217" AutoGenerateColumns="False">
+        <DataGrid Grid.Column="0" Grid.ColumnSpan="4" IsReadOnly="True" ItemsSource="{Binding table.Items}" SelectedItem="{Binding table.SelectedTask}" Margin="234,72,10,217" AutoGenerateColumns="False">
             <DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="Done" Binding="{Binding isDone}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding status}"/>
                 <DataGridTextColumn Header="Priority" Binding="{Binding priority}"/>
-                <DataGridTextColumn Header="Type" Binding="{Binding type}"/>
-                <DataGridTextColumn Header="Due Date" Binding="{Binding dueDate}"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding category}"/>
+                <DataGridTextColumn Header="Deadline" Binding="{Binding deadline}"/>
+                <DataGridTextColumn Header="Finish date" Binding="{Binding finishDate}"/>
             </DataGrid.Columns>
         </DataGrid>
         <TextBox HorizontalAlignment="Left" Margin="234,259,0,0" TextWrapping="Wrap" Text="{Binding table.Description}" VerticalAlignment="Top" Width="556" Height="103"/>

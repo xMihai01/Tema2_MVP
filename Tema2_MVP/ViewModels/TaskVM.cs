@@ -74,7 +74,17 @@ namespace Tema2_MVP.ViewModels
                 OnPropertyChanged(nameof(Date));
             }
         }
-
+        public string _status;
+        public string Status
+        {
+            get { return _status; }
+            set
+            {
+                _status = value;
+                OnPropertyChanged(nameof(Status));
+            }
+        }
+        public List<string> statusList { get; set; } = new List<string> { "Created", "In Progress", "Done" };
         public TaskVM()
         {
             Description = "No description provided.";

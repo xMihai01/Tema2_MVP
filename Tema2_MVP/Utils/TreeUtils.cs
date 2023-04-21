@@ -18,7 +18,7 @@ namespace Tema2_MVP.Utils
     internal class TreeUtils
     {
         public const string fileExtension = ".txt";
-        private static string GetPathFromTreeNode(Node fromNode)
+        public static string GetPathFromTreeNode(Node fromNode)
         {
             string path = "databases/" + ContainerVM.database.name + "/";
             Stack<string> stack = new Stack<string>();

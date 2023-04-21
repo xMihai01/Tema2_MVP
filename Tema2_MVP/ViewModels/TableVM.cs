@@ -27,6 +27,7 @@ namespace Tema2_MVP.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Items)));
             }
         }
+        public Tema2_MVP.Models.Task SelectedTask { get; set; }
 
         private string _description;
         public string Description
