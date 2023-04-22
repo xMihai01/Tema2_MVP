@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="TasksWindow" Height="450" Width="800">
     <Grid>
-        <TreeView Name="TasksTree" Margin="10,72,592,72" ItemsSource="{Binding tree.RootNode.Children}">
+        <TreeView Name="TasksTree" Margin="10,72,592,175" ItemsSource="{Binding tree.RootNode.Children}">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                     <TextBlock Text="{Binding Text}" />
@@ -35,8 +35,10 @@
                     <MenuItem Header="_Delete" Command="{Binding tree.DeleteTDLItemCommand}"/>
                     <MenuItem Header="_Move up" Command="{Binding tree.MoveUpTDLItemCommand}"/>
                     <MenuItem Header="_Move down" Command="{Binding tree.MoveDownTDLItemCommand}"/>
-                    <MenuItem Header="_Change path - Root" Command="{Binding tree.ChangePathRootItemCommand}"/>
-                    <MenuItem Header="_Change Path - SubTDL" Command="{Binding tree.ChangePathSubItemCommand}"/>
+                    <MenuItem Header="Change Path">
+                        <MenuItem Header="_Change path - Root" Command="{Binding tree.ChangePathRootItemCommand}"/>
+                        <MenuItem Header="_Change Path - SubTDL" Command="{Binding tree.ChangePathSubItemCommand}"/>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_Task">
                     <MenuItem Header="_Add" Command="{Binding AddTaskItemCommand}"/>
@@ -50,17 +52,26 @@
                     <MenuItem Header="_Find task" Command="{Binding FindTasksItemCommand}"/>
                 </MenuItem>
                 <MenuItem Header="_View">
-                    <MenuItem Header="_Sort"/>
-                    <MenuItem Header="_Filter"/>
-                    <MenuItem Header="_Statistics"/>
+                    <MenuItem Header="_Sort">
+                        <MenuItem Header="By Priority" Command="{Binding SortTasksPriorityItemCommand}"/>
+                        <MenuItem Header="By Deadline" Command="{Binding SortTasksDeadlineItemCommand}"/>
+                    </MenuItem>
+                    <MenuItem Header="_Filter">
+                        <MenuItem Header="By Category" Command="{Binding FilterByCategoryItemCommand}"/>
+                        <MenuItem Header="By finished tasks" Command="{Binding FilterByFinishedItemCommand}"/>
+                        <MenuItem Header="By overdue tasks" Command="{Binding FilterByOverdueItemCommand}"/>
+                        <MenuItem Header="By overdue, not finished tasks" Command="{Binding FilterByOverdueNotFinishedItemCommand}"/>
+                        <MenuItem Header="By future deadline, not finished tasks" Command="{Binding FilterByFutureDeadlineItemCommand}"/>
+                    </MenuItem>
+                    <MenuItem Header="_Statistics" Command="{Binding ShowStatisticsItemCommand}"/>
                 </MenuItem>
                 <MenuItem Header="_Help">
-                    <MenuItem Header="_About"/>
+                    <MenuItem Header="_About" Command="{Binding ShowAboutItemCommand}"/>
 
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <DataGrid Grid.Column="0" Grid.ColumnSpan="4" IsReadOnly="True" ItemsSource="{Binding table.Items}" SelectedItem="{Binding table.SelectedTask}" Margin="234,72,10,217" AutoGenerateColumns="False">
+        <DataGrid Grid.Column="0" IsReadOnly="True" ItemsSource="{Binding table.Items}" SelectedItem="{Binding table.SelectedTask}" Margin="234,72,10,180" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Header="Done" Binding="{Binding isDone}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
@@ -71,6 +82,10 @@
                 <DataGridTextColumn Header="Finish date" Binding="{Binding finishDate}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox HorizontalAlignment="Left" Margin="234,259,0,0" IsReadOnly="True" TextWrapping="Wrap" Text="{Binding table.SelectedTask.description}" VerticalAlignment="Top" Width="556" Height="103"/>
+        <TextBox HorizontalAlignment="Left" Margin="234,285,0,0" IsReadOnly="True" TextWrapping="Wrap" Text="{Binding table.SelectedTask.description}" VerticalAlignment="Top" Width="556" Height="118"/>
+        <Label Content="Selected task's notes (description)" HorizontalAlignment="Left" Margin="234,254,0,0" VerticalAlignment="Top" Width="211"/>
+        <Label Content="{Binding table.AboveTableText}" HorizontalAlignment="Center" Margin="0,42,0,0" VerticalAlignment="Top" Width="314" Height="25"/>
+        <TextBox IsReadOnly="True" AcceptsReturn="True" Background="BurlyWood" HorizontalAlignment="Left" Margin="10,285,0,0" TextWrapping="Wrap" Text="{Binding table.StatisticsBox}" VerticalAlignment="Top" Width="198" Height="118"/>
+
     </Grid>
 </Window>

@@ -35,6 +35,15 @@ namespace Tema2_MVP.ViewModels
         public ICommand ManageCategoryAddItemCommand => new RelayCommand(ManageCategoryAddItem);
         public ICommand ManageCategoryRemoveItemCommand => new RelayCommand(ManageCategoryRemoveItem);
         public ICommand FindTasksItemCommand => new RelayCommand(FindTasksItem);
+        public ICommand SortTasksDeadlineItemCommand => new RelayCommand(SortTasksDeadlineItem);
+        public ICommand SortTasksPriorityItemCommand => new RelayCommand(SortTasksPriorityItem);
+        public ICommand FilterByCategoryItemCommand => new RelayCommand(FilterByCategoryItem);
+        public ICommand FilterByFinishedItemCommand => new RelayCommand(FilterByFinishedItem);
+        public ICommand FilterByOverdueItemCommand => new RelayCommand(FilterByOverdueItem);
+        public ICommand FilterByOverdueNotFinishedItemCommand => new RelayCommand(FilterByOverdueNotFinishedItem);
+        public ICommand FilterByFutureDeadlineItemCommand => new RelayCommand(FilterByFutureDeadlineItem);
+        public ICommand ShowStatisticsItemCommand => new RelayCommand(ShowStatisticsItem);
+        public ICommand ShowAboutItemCommand => new RelayCommand(ShowAboutItem);
         public void AddTaskItem()
         {
             if (tree.SelectedItem == null)
@@ -145,6 +154,82 @@ namespace Tema2_MVP.ViewModels
             FindTaskWindow window = new FindTaskWindow();
             window.ShowDialog();
         }
+        
+
+        public void SortTasksPriorityItem()
+        {
+            if (tree.SelectedItem == null)
+            {
+                MessageBox.Show("Select a TDL first.");
+                return;
+            }
+            tree.SelectedItem.tasks = OtherUtils.SortByPriority(tree.SelectedItem);
+            table.UpdateTable(tree.SelectedItem);
+
+        }
+        public void SortTasksDeadlineItem()
+        {
+            if (tree.SelectedItem == null)
+            {
+                MessageBox.Show("Select a TDL first.");
+                return;
+            }
+            tree.SelectedItem.tasks = OtherUtils.SortByDeadline(tree.SelectedItem);
+            table.UpdateTable(tree.SelectedItem);
+        }
+
+        public void FilterByCategoryItem()
+        {
+            if (tree.SelectedItem == null)
+            {
+                MessageBox.Show("Select a TDL first.");
+                return;
+            }
+            InputWindow input = new InputWindow("Enter category name", "category", FileUtils.GetCategoryList());
+            if (input.ShowDialog() == true)
+                table.UpdateTable(tree.SelectedItem, OtherUtils.FilterByCategory(tree.SelectedItem, input.Answer));
+        }
+        public void FilterByFinishedItem()
+        {
+            if (tree.SelectedItem == null)
+            {
+                MessageBox.Show("Select a TDL first.");
+                return;
+            }
+            table.UpdateTable(tree.SelectedItem, OtherUtils.FilterByFinishedTask(tree.SelectedItem));
+        }
+        public void FilterByOverdueItem()
+        {
+            if (tree.SelectedItem == null)
+            {
+                MessageBox.Show("Select a TDL first.");
+                return;
+            }
+            table.UpdateTable(tree.SelectedItem, OtherUtils.FilterByOverdueTask(tree.SelectedItem));
+        }
+        public void FilterByOverdueNotFinishedItem()
+        {
+            if (tree.SelectedItem == null)
+            {
+                MessageBox.Show("Select a TDL first.");
+                return;
+            }
+            table.UpdateTable(tree.SelectedItem, OtherUtils.FilterByOverdueNotFinished(tree.SelectedItem));
+        }
+        public void FilterByFutureDeadlineItem()
+        {
+            if (tree.SelectedItem == null)
+            {
+                MessageBox.Show("Select a TDL first.");
+                return;
+            }
+            table.UpdateTable(tree.SelectedItem, OtherUtils.FilterByFutureDeadlineNotFinished(tree.SelectedItem));
+        }
+
+        public void ShowStatisticsItem()
+        {
+            table.StatisticsBox = OtherUtils.MakeStatisticsMessage();
+        }
 
         private void UpdateTaskFromFile(InputTaskWindow input)
         {
@@ -176,6 +261,10 @@ namespace Tema2_MVP.ViewModels
             TaskUtils.SaveTaskToFile(tree.SelectedItem, task, false);
             tree.SelectedItem.tasks[tree.SelectedItem.tasks.IndexOf(table.SelectedTask)] = task;
             table.SelectedTask = task;
+        }
+        public void ShowAboutItem()
+        {
+            MessageBox.Show("Doloiu Mihai-Alexandru\n10LF311\nmihai.doloiu@student.unitbv.ro");
         }
     }
 }

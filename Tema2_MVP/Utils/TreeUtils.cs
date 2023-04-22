@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Common;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -158,6 +159,11 @@ namespace Tema2_MVP.Utils
         public static void ChangePathRoot(Node selectedNode)
         {
             string dbName = ContainerVM.database.name;
+            if (GetPathFromTreeNode(selectedNode) == "databases/" + dbName + "/" + selectedNode.Text)
+            {
+                MessageBox.Show("Can't move TDL to the same location");
+                return;
+            }
             using (StreamWriter file = new StreamWriter("databases/" + dbName + "/todoList.txt", true))
             {
                 file.WriteLine(selectedNode.Text);
@@ -168,6 +174,11 @@ namespace Tema2_MVP.Utils
         }
         public static void ChangePathSub(Node selectedNode, Node toNode)
         {
+            if (GetPathFromTreeNode(selectedNode) == GetPathFromTreeNode(toNode) + selectedNode.Text)
+            {
+                MessageBox.Show("Can't move TDL to the same location");
+                return;
+            }
             using (StreamWriter file = new StreamWriter(GetPathFromTreeNode(toNode) + "todoList.txt", true))
             {
                 file.WriteLine(selectedNode.Text);

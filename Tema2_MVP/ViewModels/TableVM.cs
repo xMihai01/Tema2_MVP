@@ -33,7 +33,7 @@ namespace Tema2_MVP.ViewModels
                 if (_selectedTask != null)
                     Description = _selectedTask.description;
             } }
-
+        
         private string _description;
         public string Description
         {
@@ -48,13 +48,46 @@ namespace Tema2_MVP.ViewModels
             }
         }
 
+        private string _aboveTableText;
+        public string AboveTableText
+        {
+            get { return _aboveTableText; }
+            set
+            {
+                if (_aboveTableText != value)
+                {
+                    _aboveTableText = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AboveTableText)));
+                }
+            }
+        }
+
+        private string _statisticsBox;
+        public string StatisticsBox
+        {
+            get { return _statisticsBox; }
+            set
+            {
+                if (_statisticsBox != value)
+                {
+                    _statisticsBox = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(StatisticsBox)));
+                }
+            }
+        }
+
         public TableVM()
         {
-
+            StatisticsBox = "Stats not loaded yet!\nGo to View -> Statistics to load them!";
         }
-        public void UpdateTable(Node atNode)
+        public void UpdateTable(Node atNode, ObservableCollection<Models.Task> tasks = null)
         {
-            Items = atNode.tasks;
+            if (tasks == null)
+                Items = atNode.tasks;
+            else Items = tasks;
+
+            AboveTableText = "Viewing \"" + atNode.Text + "\" to-do list. " + Items.Count + " tasks shown";
+            StatisticsBox = "Stats unloaded!\nGo to View -> Statistics to load them!";
         }
 
     }

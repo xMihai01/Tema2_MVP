@@ -35,7 +35,7 @@ namespace Tema2_MVP.Views
         {
             if (sender is TreeViewItem treeViewItem && treeViewItem.DataContext is Node dataModel)
             {
-                container.table.Items = dataModel.tasks;
+                container.table.UpdateTable(dataModel);
                 container.tree.SelectedItem = dataModel;
             }
         }
