@@ -30,7 +30,19 @@ namespace Tema2_MVP.ViewModels
         }
         public Node SelectedItem { get; set; }
         public Node helperNode { get; set; }
-
+        private string _dbname;
+        public string DBName
+        {
+            get { return _dbname; }
+            set
+            {
+                if (_dbname != value)
+                {
+                    _dbname = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DBName)));
+                }
+            }
+        }
         public TreeVM()
         {
             Node node = new Node
@@ -40,7 +52,7 @@ namespace Tema2_MVP.ViewModels
 
             };
             RootNode = node;
-
+            DBName = "Current Database: " + node.Text;
         }
 
         private void UpdateTree()
@@ -53,6 +65,7 @@ namespace Tema2_MVP.ViewModels
 
             };
             RootNode = node;
+            DBName = "Current Database: " + node.Text;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -72,6 +85,7 @@ namespace Tema2_MVP.ViewModels
         public ICommand MoveDownTDLItemCommand => new RelayCommand(MoveDownTDLItem);
         public ICommand ChangePathRootItemCommand => new RelayCommand(ChangePathRootItem);
         public ICommand ChangePathSubItemCommand => new RelayCommand(ChangePathSubItem);
+        public ICommand DeleteDatabaseItemCommand => new RelayCommand(DeleteDatabaseItem);
 
         public void OpenDatabaseItem()
         {
@@ -114,6 +128,7 @@ namespace Tema2_MVP.ViewModels
                 return;
             }
             DeleteTDL(SelectedItem, true);
+            SelectedItem= null;
             UpdateTree();
         }
         public void EditTDLItem()
@@ -172,6 +187,12 @@ namespace Tema2_MVP.ViewModels
             }
             ChangePathSub(helperNode, SelectedItem); UpdateTree(); helperNode = null;
             
+        }
+        public void DeleteDatabaseItem()
+        {
+            InputWindow input = new InputWindow("Database name to delete", "database", GetDatabaseList());
+            if (input.ShowDialog() == true)
+                DeleteDatabase(input.Answer);
         }
 
     }

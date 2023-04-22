@@ -22,51 +22,56 @@
         <DockPanel x:Name="gameWindowDockPanel" Margin="0,0,0,392">
             <Menu DockPanel.Dock="Top" Height="49">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_Open Database" Command="{Binding tree.OpenDatabaseItemCommand}"/>
-                    <MenuItem Header="_New Database" Command="{Binding tree.CreateDatabaseItemCommand}"/>
-                    <MenuItem Header="_Archive Database"/>
+                    <MenuItem Header="Open Database" Command="{Binding tree.OpenDatabaseItemCommand}"/>
+                    <MenuItem Header="New Database" Command="{Binding tree.CreateDatabaseItemCommand}"/>
+                    <MenuItem Header="Archive Database" Command="{Binding tree.DeleteDatabaseItemCommand}"/>
                     <Separator />
-                    <MenuItem Header="_Exit"/>
+                    <MenuItem Header="Exit" Click="MenuItem_Click"/>
                 </MenuItem>
                 <MenuItem Header="_TDL">
-                    <MenuItem Header="_Add Root TDL" Command="{Binding tree.AddRootTDLItemCommand}"/>
-                    <MenuItem Header="_Add Sub-TDL" Command="{Binding tree.AddTDLItemCommand}"/>
-                    <MenuItem Header="_Edit" Command="{Binding tree.EditTDLItemCommand}"/>
-                    <MenuItem Header="_Delete" Command="{Binding tree.DeleteTDLItemCommand}"/>
-                    <MenuItem Header="_Move up" Command="{Binding tree.MoveUpTDLItemCommand}"/>
-                    <MenuItem Header="_Move down" Command="{Binding tree.MoveDownTDLItemCommand}"/>
+                    <MenuItem Header="Add">
+                        <MenuItem Header="Root TDL" Command="{Binding tree.AddRootTDLItemCommand}"/>
+                        <MenuItem Header="Sub-TDL" Command="{Binding tree.AddTDLItemCommand}"/>
+                    </MenuItem>
+
+                    <MenuItem Header="Edit" Command="{Binding tree.EditTDLItemCommand}"/>
+                    <MenuItem Header="Delete" Command="{Binding tree.DeleteTDLItemCommand}"/>
+                    <MenuItem Header="Move up" Command="{Binding tree.MoveUpTDLItemCommand}"/>
+                    <MenuItem Header="Move down" Command="{Binding tree.MoveDownTDLItemCommand}"/>
                     <MenuItem Header="Change Path">
-                        <MenuItem Header="_Change path - Root" Command="{Binding tree.ChangePathRootItemCommand}"/>
-                        <MenuItem Header="_Change Path - SubTDL" Command="{Binding tree.ChangePathSubItemCommand}"/>
+                        <MenuItem Header="Root" Command="{Binding tree.ChangePathRootItemCommand}"/>
+                        <MenuItem Header="SubTDL" Command="{Binding tree.ChangePathSubItemCommand}"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_Task">
-                    <MenuItem Header="_Add" Command="{Binding AddTaskItemCommand}"/>
-                    <MenuItem Header="_Edit" Command="{Binding EditTaskItemCommand}"/>
-                    <MenuItem Header="_Delete" Command="{Binding DeleteTaskItemCommand}"/>
-                    <MenuItem Header="_Set done" Command="{Binding SetDoneTaskItemCommand}"/>
-                    <MenuItem Header="_Move up" Command="{Binding MoveTaskUpItemCommand}"/>
-                    <MenuItem Header="_Move down" Command="{Binding MoveTaskDownItemCommand}"/>
-                    <MenuItem Header="_Manage Category - Add" Command="{Binding ManageCategoryAddItemCommand}"/>
-                    <MenuItem Header="_Manage Category - Remove" Command="{Binding ManageCategoryRemoveItemCommand}"/>
-                    <MenuItem Header="_Find task" Command="{Binding FindTasksItemCommand}"/>
+                    <MenuItem Header="Add" Command="{Binding AddTaskItemCommand}"/>
+                    <MenuItem Header="Edit" Command="{Binding EditTaskItemCommand}"/>
+                    <MenuItem Header="Delete" Command="{Binding DeleteTaskItemCommand}"/>
+                    <MenuItem Header="Set done" Command="{Binding SetDoneTaskItemCommand}"/>
+                    <MenuItem Header="Move up" Command="{Binding MoveTaskUpItemCommand}"/>
+                    <MenuItem Header="Move down" Command="{Binding MoveTaskDownItemCommand}"/>
+                    <MenuItem Header="Manage Category">
+                        <MenuItem Header="Add" Command="{Binding ManageCategoryAddItemCommand}"/>
+                        <MenuItem Header="Remove" Command="{Binding ManageCategoryRemoveItemCommand}"/>
+                    </MenuItem>
+                    <MenuItem Header="Find task" Command="{Binding FindTasksItemCommand}"/>
                 </MenuItem>
                 <MenuItem Header="_View">
-                    <MenuItem Header="_Sort">
+                    <MenuItem Header="Sort">
                         <MenuItem Header="By Priority" Command="{Binding SortTasksPriorityItemCommand}"/>
                         <MenuItem Header="By Deadline" Command="{Binding SortTasksDeadlineItemCommand}"/>
                     </MenuItem>
-                    <MenuItem Header="_Filter">
+                    <MenuItem Header="Filter">
                         <MenuItem Header="By Category" Command="{Binding FilterByCategoryItemCommand}"/>
                         <MenuItem Header="By finished tasks" Command="{Binding FilterByFinishedItemCommand}"/>
                         <MenuItem Header="By overdue tasks" Command="{Binding FilterByOverdueItemCommand}"/>
                         <MenuItem Header="By overdue, not finished tasks" Command="{Binding FilterByOverdueNotFinishedItemCommand}"/>
                         <MenuItem Header="By future deadline, not finished tasks" Command="{Binding FilterByFutureDeadlineItemCommand}"/>
                     </MenuItem>
-                    <MenuItem Header="_Statistics" Command="{Binding ShowStatisticsItemCommand}"/>
+                    <MenuItem Header="Statistics" Command="{Binding ShowStatisticsItemCommand}"/>
                 </MenuItem>
-                <MenuItem Header="_Help">
-                    <MenuItem Header="_About" Command="{Binding ShowAboutItemCommand}"/>
+                <MenuItem Header="Help">
+                    <MenuItem Header="About" Command="{Binding ShowAboutItemCommand}"/>
 
                 </MenuItem>
             </Menu>
@@ -86,6 +91,7 @@
         <Label Content="Selected task's notes (description)" HorizontalAlignment="Left" Margin="234,254,0,0" VerticalAlignment="Top" Width="211"/>
         <Label Content="{Binding table.AboveTableText}" HorizontalAlignment="Center" Margin="0,42,0,0" VerticalAlignment="Top" Width="314" Height="25"/>
         <TextBox IsReadOnly="True" AcceptsReturn="True" Background="BurlyWood" HorizontalAlignment="Left" Margin="10,285,0,0" TextWrapping="Wrap" Text="{Binding table.StatisticsBox}" VerticalAlignment="Top" Width="198" Height="118"/>
+        <Label Content="{Binding tree.DBName}" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" Width="198"/>
 
     </Grid>
 </Window>

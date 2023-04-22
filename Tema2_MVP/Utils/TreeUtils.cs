@@ -159,7 +159,9 @@ namespace Tema2_MVP.Utils
         public static void ChangePathRoot(Node selectedNode)
         {
             string dbName = ContainerVM.database.name;
-            if (GetPathFromTreeNode(selectedNode) == "databases/" + dbName + "/" + selectedNode.Text)
+            Console.WriteLine("databases/" + dbName + "/" + selectedNode.Text);
+            Console.WriteLine(GetPathFromTreeNode(selectedNode));
+            if (GetPathFromTreeNode(selectedNode) == "databases/" + dbName + "/" + selectedNode.Text + "/")
             {
                 MessageBox.Show("Can't move TDL to the same location");
                 return;
@@ -174,7 +176,7 @@ namespace Tema2_MVP.Utils
         }
         public static void ChangePathSub(Node selectedNode, Node toNode)
         {
-            if (GetPathFromTreeNode(selectedNode) == GetPathFromTreeNode(toNode) + selectedNode.Text)
+            if (GetPathFromTreeNode(selectedNode) == GetPathFromTreeNode(toNode) + selectedNode.Text + "/")
             {
                 MessageBox.Show("Can't move TDL to the same location");
                 return;

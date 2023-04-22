@@ -40,5 +40,9 @@ namespace Tema2_MVP.Views
             }
         }
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

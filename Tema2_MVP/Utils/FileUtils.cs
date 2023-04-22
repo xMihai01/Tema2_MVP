@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Shapes;
 using System.Xml.Linq;
 using Tema2_MVP.Models;
 using Tema2_MVP.ViewModels;
@@ -28,15 +29,26 @@ namespace Tema2_MVP.Utils
             }
             if (!File.Exists("databases/databaseList.txt"))
             {
-                File.Create("databases/databaseList.txt");
+                using (FileStream fs3 = File.Create("databases/databaseList.txt")) { }
+                CreateDatabase("default");
             }
             if (!File.Exists("databases/currentDatabase" + fileExtension))
             {
-                File.Create("databases/currentDatabase" + fileExtension);
+                using (FileStream fs3 = File.Create("databases/currentDatabase" + fileExtension)) { }
+                using (StreamWriter file = new StreamWriter("databases/currentDatabase" + fileExtension, true))
+                {
+                    file.WriteLine("default");
+                }
             }
             if (!File.Exists("databases/categoryList" + fileExtension))
             {
-                File.Create("databases/categoryList" + fileExtension);
+                using (FileStream fs3 = File.Create("databases/categoryList" + fileExtension)) { }
+                using (StreamWriter file = new StreamWriter("databases/categoryList" + fileExtension, true))
+                {
+                    file.WriteLine("School");
+                    file.WriteLine("Work");
+                    file.WriteLine("Other");
+                }
             }
         }
         public static Database GetDatabaseDetailsFromFile(string databaseName)
@@ -88,7 +100,7 @@ namespace Tema2_MVP.Utils
 
         public static void CreateDatabase(string name)
         {
-            string[] dbs = System.IO.File.ReadAllLines("databases/currentDatabase.txt");
+            string[] dbs = System.IO.File.ReadAllLines("databases/databaseList.txt");
             foreach (string db in dbs)
             {
                 if (db == name)
@@ -105,6 +117,34 @@ namespace Tema2_MVP.Utils
             Directory.CreateDirectory("databases/" + name);
             using (FileStream fs3 = File.Create("databases/" + name + "/todoList" + fileExtension)) ;
         }
+        public static void DeleteDatabase(string databaseName)
+        {
+            string[] dbs = System.IO.File.ReadAllLines("databases/databaseList.txt");
+            if (databaseName == GetCurrentDB())
+            {
+                MessageBox.Show("Switch to another database before deleting the current one.");
+                return;
+            }
+            using (StreamWriter file = new StreamWriter(databaseDirectory + "/databaseList" + fileExtension, false))
+            {
+                foreach (string db in dbs)
+                {
+                    if (db != databaseName)
+                    {
+                        file.WriteLine(db);
+                    }
+                }
+            }
+            if (Directory.Exists("databases/" + databaseName))
+                Directory.Delete("databases/" + databaseName, true);
+            else
+            {
+                MessageBox.Show("Database not found with the given name");
+                return;
+            }
+            MessageBox.Show("Success!");
+        }
+    
 
 
         public static string[] GetDatabaseList()
@@ -148,6 +188,7 @@ namespace Tema2_MVP.Utils
                 file.WriteLine(name);
             }
         }
+
         public static void RemoveCategory(string name)
         {
             string[] categories = System.IO.File.ReadAllLines("databases/categoryList.txt");
