@@ -63,14 +63,19 @@
     <Compile Include="Models\Database.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\TaskDetail.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\OtherUtils.cs" />
     <Compile Include="Utils\TaskUtils.cs" />
     <Compile Include="Utils\TreeUtils.cs" />
     <Compile Include="ViewModels\ContainerVM.cs" />
+    <Compile Include="ViewModels\FindTasksVM.cs" />
     <Compile Include="ViewModels\TableVM.cs" />
     <Compile Include="ViewModels\TaskVM.cs" />
     <Compile Include="ViewModels\TreeVM.cs" />
+    <Compile Include="Views\FindTaskWindow.xaml.cs">
+      <DependentUpon>FindTaskWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InputTaskWindow.xaml.cs">
       <DependentUpon>InputTaskWindow.xaml</DependentUpon>
     </Compile>
@@ -109,6 +114,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Views\FindTaskWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\InputTaskWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

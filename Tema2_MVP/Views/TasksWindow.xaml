@@ -41,12 +41,13 @@
                 <MenuItem Header="_Task">
                     <MenuItem Header="_Add" Command="{Binding AddTaskItemCommand}"/>
                     <MenuItem Header="_Edit" Command="{Binding EditTaskItemCommand}"/>
-                    <MenuItem Header="_Delete"/>
-                    <MenuItem Header="_Set done"/>
-                    <MenuItem Header="_Move up"/>
-                    <MenuItem Header="_Move down"/>
-                    <MenuItem Header="_Manage Category"/>
-                    <MenuItem Header="_Find task"/>
+                    <MenuItem Header="_Delete" Command="{Binding DeleteTaskItemCommand}"/>
+                    <MenuItem Header="_Set done" Command="{Binding SetDoneTaskItemCommand}"/>
+                    <MenuItem Header="_Move up" Command="{Binding MoveTaskUpItemCommand}"/>
+                    <MenuItem Header="_Move down" Command="{Binding MoveTaskDownItemCommand}"/>
+                    <MenuItem Header="_Manage Category - Add" Command="{Binding ManageCategoryAddItemCommand}"/>
+                    <MenuItem Header="_Manage Category - Remove" Command="{Binding ManageCategoryRemoveItemCommand}"/>
+                    <MenuItem Header="_Find task" Command="{Binding FindTasksItemCommand}"/>
                 </MenuItem>
                 <MenuItem Header="_View">
                     <MenuItem Header="_Sort"/>
@@ -70,6 +71,6 @@
                 <DataGridTextColumn Header="Finish date" Binding="{Binding finishDate}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox HorizontalAlignment="Left" Margin="234,259,0,0" TextWrapping="Wrap" Text="{Binding table.Description}" VerticalAlignment="Top" Width="556" Height="103"/>
+        <TextBox HorizontalAlignment="Left" Margin="234,259,0,0" IsReadOnly="True" TextWrapping="Wrap" Text="{Binding table.SelectedTask.description}" VerticalAlignment="Top" Width="556" Height="103"/>
     </Grid>
 </Window>

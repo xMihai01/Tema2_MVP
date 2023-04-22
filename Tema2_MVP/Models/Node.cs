@@ -16,6 +16,7 @@ namespace Tema2_MVP.Models
         public Node()
         {
             Children = new ObservableCollection<Node>();
+            tasks = new ObservableCollection<Task>();
         }
     }
 }

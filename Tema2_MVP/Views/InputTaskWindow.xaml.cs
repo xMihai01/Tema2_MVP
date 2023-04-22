@@ -29,7 +29,7 @@ namespace Tema2_MVP.Views
             DataContext = taskVM;
             statusComboBox.IsEnabled = false;
         }
-        public InputTaskWindow(Models.Task task)
+        public InputTaskWindow(Models.Task task, bool offMode = false, string buttonMessage = "no message")
         {
             InitializeComponent();
             taskVM = new TaskVM();
@@ -41,6 +41,17 @@ namespace Tema2_MVP.Views
             taskVM.Status = task.status;
             taskVM.Date = task.deadline;
             statusComboBox.IsEnabled = true;
+            statusLabel.IsEnabled = true;
+            if (offMode)
+            {
+                nameBox.IsEnabled = false;
+                descriptionBox.IsEnabled= false;
+                categoryBox.IsEnabled = false;
+                priorityBox.IsEnabled = false;
+                statusComboBox.IsEnabled = false;
+                dateBox.IsEnabled = false;
+                SingleButton.Content = buttonMessage;
+            }
         }
 
         private void SaveTask(object sender, RoutedEventArgs e)

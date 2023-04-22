@@ -7,18 +7,19 @@
         mc:Ignorable="d"
         Title="InputTaskWindow" Height="350" Width="500">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="67,37,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="120" Height="36"/>
-        <ComboBox ItemsSource="{Binding priorityList}" SelectedItem="{Binding Priority}" HorizontalAlignment="Left" Margin="231,104,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox ItemsSource="{Binding categoryList}" SelectedItem="{Binding Category}" HorizontalAlignment="Left" Margin="67,104,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="nameBox" HorizontalAlignment="Left" Margin="67,37,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="120" Height="36"/>
+        <ComboBox Name="priorityBox" ItemsSource="{Binding priorityList}" SelectedItem="{Binding Priority}" HorizontalAlignment="Left" Margin="231,104,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="categoryBox" ItemsSource="{Binding categoryList}" SelectedItem="{Binding Category}" HorizontalAlignment="Left" Margin="67,104,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox Name="statusComboBox" ItemsSource="{Binding statusList}" SelectedItem="{Binding Status}" HorizontalAlignment="Left" Margin="380,104,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="67,162,0,0" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="284" Height="54"/>
-        <DatePicker SelectedDate="{Binding Date}" HorizontalAlignment="Left" Margin="231,37,0,0" VerticalAlignment="Top" Height="36" Width="120"/>
+        <TextBox Name="descriptionBox" HorizontalAlignment="Left" Margin="67,162,0,0" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="284" Height="54"/>
+        <DatePicker Name="dateBox" SelectedDate="{Binding Date}" HorizontalAlignment="Left" Margin="231,37,0,0" VerticalAlignment="Top" Height="36" Width="120"/>
         <Label Content="Task Name" HorizontalAlignment="Left" Margin="89,6,0,0" VerticalAlignment="Top" Width="86"/>
         <Label Content="Deadline" HorizontalAlignment="Left" Margin="267,6,0,0" VerticalAlignment="Top"/>
         <Label Content="Priority" HorizontalAlignment="Left" Margin="267,78,0,0" VerticalAlignment="Top"/>
         <Label Content="Category" HorizontalAlignment="Left" Margin="98,78,0,0" VerticalAlignment="Top"/>
         <Label Content="Description" HorizontalAlignment="Left" Margin="180,131,0,0" VerticalAlignment="Top"/>
-        <Button Click="SaveTask" Content="Save Task" HorizontalAlignment="Left" Margin="139,256,0,0" VerticalAlignment="Top" Height="22" Width="140"/>
-  
+        <Button Name="SingleButton" Click="SaveTask" Content="Save Task" HorizontalAlignment="Left" Margin="139,256,0,0" VerticalAlignment="Top" Height="22" Width="140"/>
+        <Label Name="statusLabel" IsEnabled="False" Content="Status" HorizontalAlignment="Left" Margin="411,78,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

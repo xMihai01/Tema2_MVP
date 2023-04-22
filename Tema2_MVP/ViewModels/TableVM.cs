@@ -27,7 +27,12 @@ namespace Tema2_MVP.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Items)));
             }
         }
-        public Tema2_MVP.Models.Task SelectedTask { get; set; }
+        private Tema2_MVP.Models.Task _selectedTask;
+        public Tema2_MVP.Models.Task SelectedTask { get { return _selectedTask; } set { _selectedTask = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTask)));
+                if (_selectedTask != null)
+                    Description = _selectedTask.description;
+            } }
 
         private string _description;
         public string Description
@@ -45,18 +50,11 @@ namespace Tema2_MVP.ViewModels
 
         public TableVM()
         {
-    
+
         }
         public void UpdateTable(Node atNode)
         {
             Items = atNode.tasks;
-        }
-
-        public ICommand DescriptionBoxUpdateCommand => new RelayCommand(DescriptionBoxUpdate);
-
-        public void DescriptionBoxUpdate()
-        {
-            Console.WriteLine("d");   
         }
 
     }

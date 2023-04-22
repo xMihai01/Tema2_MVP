@@ -83,5 +83,62 @@ namespace Tema2_MVP.Utils
             File.Move(path + task.name + fileExtension, path + newName + fileExtension);
             task.name = newName;
         }
+        public static void DeleteTask(Node node, Models.Task task)
+        {
+            string path = TreeUtils.GetPathFromTreeNode(node);
+            string[] data = System.IO.File.ReadAllLines(path + "tasksList.txt");
+            using (StreamWriter file = new StreamWriter(path + "tasksList.txt", false))
+            {
+                foreach (string name in data)
+                {
+                    if (name != task.name)
+                    {
+                        file.WriteLine(name);
+                    }
+                }
+            }
+            File.Delete(path + task.name + fileExtension);
+            node.tasks.Remove(task);
+        }
+        public static void MoveTask(Node selectedNode, Models.Task task, bool moveUp)
+        {
+            string path = TreeUtils.GetPathFromTreeNode(selectedNode);
+            string[] data = System.IO.File.ReadAllLines(path + "tasksList.txt");
+            for (int index = 0; index < data.Length; index++)
+            {
+                if (data[index] == task.name)
+                    if ((index == 0 && moveUp) || (index == data.Length - 1 && !moveUp))
+                    {
+                        MessageBox.Show("Task can't be moved further");
+                        return;
+                    }
+                    else
+                    {
+                        if (moveUp)
+                        {
+                            string temp = data[index];
+                            data[index] = data[index - 1];
+                            data[index - 1] = temp;
+                            break;
+                        }
+                        else
+                        {
+                            string temp = data[index];
+                            data[index] = data[index + 1];
+                            data[index + 1] = temp;
+                            break;
+                        }
+
+                    }
+            }
+            using (StreamWriter file = new StreamWriter(path + "tasksList.txt", false))
+            {
+                foreach (string str in data)
+                {
+                    file.WriteLine(str);
+                }
+            }
+            MessageBox.Show("Success!");
+        }
     }
 }

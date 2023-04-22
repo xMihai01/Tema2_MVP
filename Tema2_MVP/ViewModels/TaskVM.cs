@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using Tema2_MVP.Commands;
 using Tema2_MVP.Models;
+using Tema2_MVP.Utils;
 
 namespace Tema2_MVP.ViewModels
 {
@@ -37,7 +38,7 @@ namespace Tema2_MVP.ViewModels
                 OnPropertyChanged(nameof(Category));
             }
         }
-        public List<string> categoryList { get; set; } = new List<string> { "School", "Work", "Sport", "Other" };
+        public List<string> categoryList { get; set; } = new List<string>(FileUtils.GetCategoryList());
 
         public string _name;
 

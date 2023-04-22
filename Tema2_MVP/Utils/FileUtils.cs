@@ -26,12 +26,17 @@ namespace Tema2_MVP.Utils
             {
                 Directory.CreateDirectory("databases");
             }
-            if (!File.Exists("databases/databaseList.txt")) {
+            if (!File.Exists("databases/databaseList.txt"))
+            {
                 File.Create("databases/databaseList.txt");
             }
             if (!File.Exists("databases/currentDatabase" + fileExtension))
             {
                 File.Create("databases/currentDatabase" + fileExtension);
+            }
+            if (!File.Exists("databases/categoryList" + fileExtension))
+            {
+                File.Create("databases/categoryList" + fileExtension);
             }
         }
         public static Database GetDatabaseDetailsFromFile(string databaseName)
@@ -127,6 +132,42 @@ namespace Tema2_MVP.Utils
                 return data[0];
             return "";
         }
-
+        public static void AddCategory(string name)
+        {
+            string[] categories = System.IO.File.ReadAllLines("databases/categoryList.txt");
+            foreach (string cate in categories)
+            {
+                if (cate == name)
+                {
+                    MessageBox.Show("There is already a category with the given name!");
+                    return;
+                }
+            }
+            using (StreamWriter file = new StreamWriter(databaseDirectory + "/categoryList" + fileExtension, true))
+            {
+                file.WriteLine(name);
+            }
+        }
+        public static void RemoveCategory(string name)
+        {
+            string[] categories = System.IO.File.ReadAllLines("databases/categoryList.txt");
+      
+            using (StreamWriter file = new StreamWriter(databaseDirectory + "/categoryList" + fileExtension, false))
+            {
+                foreach (string cate in categories)
+                {
+                    if (cate != name) 
+                        file.WriteLine(cate);
+                }
+            }
+        }
+        public static string[] GetCategoryList()
+        {
+            if (File.Exists("databases/categoryList.txt"))
+            {
+                return System.IO.File.ReadAllLines("databases/categoryList.txt");
+            }
+            return null;
+        }
     }
 }
